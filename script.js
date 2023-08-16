@@ -2,9 +2,9 @@ const operate = {
   "+": (a, b) => +a + +b,
   "−": (a, b) => +a - +b,
   "÷": (a, b) => {
-    if (b == 0) return 'lol what'
-    if (a == 0) return 0
-    return +a / +b
+    if (b == 0) return "lol what";
+    if (a == 0) return 0;
+    return +a / +b;
   },
   "×": (a, b) => +a * +b,
 };
@@ -34,7 +34,7 @@ for (let item of CALC_BTN) {
     ) {
       operator = e.target.innerText;
       console.log(operator);
-    } else if (e.target.innerText === "=") {
+    } else if (e.target.innerText === "=" && operator !== "") {
       hasil = operate[operator](operand.first, operand.last);
       operand.first = String(hasil);
       operand.last = "";
@@ -55,8 +55,8 @@ DELETE_BTN.onclick = () => {
 };
 
 CLEAR_BTN.onclick = () => {
-  operand.first = ''
-  operand.last = ''
-  operator = ''
-  hasil = ''
-}
+  operand.first = "";
+  operand.last = "";
+  operator = "";
+  hasil = "";
+};
