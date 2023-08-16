@@ -1,7 +1,11 @@
 const operate = {
   "+": (a, b) => +a + +b,
   "−": (a, b) => +a - +b,
-  "÷": (a, b) => +a / +b,
+  "÷": (a, b) => {
+    if (b == 0) return 'lol what'
+    if (a == 0) return 0
+    return +a / +b
+  },
   "×": (a, b) => +a * +b,
 };
 
@@ -49,3 +53,10 @@ DELETE_BTN.onclick = () => {
     console.log(operand.last);
   }
 };
+
+CLEAR_BTN.onclick = () => {
+  operand.first = ''
+  operand.last = ''
+  operator = ''
+  hasil = ''
+}
