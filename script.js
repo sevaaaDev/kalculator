@@ -24,22 +24,22 @@ for (let item of CALC_BTN) {
   item.addEventListener("click", (e) => {
     if (e.target.className === "operand" && operator === "") {
       operand.first = operand.first + e.target.innerText;
-      console.log(operand.first);
+      displayNumber(operand.first);
     } else if (e.target.className === "operand") {
       operand.last = operand.last + e.target.innerText;
-      console.log(operand.last);
+      displayNumber(operand.last);
     } else if (
       e.target.className === "operator" &&
       e.target.innerText !== "="
     ) {
       operator = e.target.innerText;
-      console.log(operator);
+      displayNumber(operator);
     } else if (e.target.innerText === "=" && operator !== "") {
       hasil = operate[operator](operand.first, operand.last);
       operand.first = String(hasil);
       operand.last = "";
       operator = "";
-      console.log(hasil);
+      displayNumber(hasil);
     }
   });
 }
@@ -47,10 +47,10 @@ for (let item of CALC_BTN) {
 DELETE_BTN.onclick = () => {
   if (operator === "") {
     operand.first = operand.first.substring(0, operand.first.length - 1);
-    console.log(operand.first);
+    displayNumber(operand.first);
   } else {
     operand.last = operand.last.substring(0, operand.last.length - 1);
-    console.log(operand.last);
+    displayNumber(operand.last);
   }
 };
 
@@ -59,4 +59,10 @@ CLEAR_BTN.onclick = () => {
   operand.last = "";
   operator = "";
   hasil = "";
+  displayNumber(operand.first)
 };
+
+function displayNumber(text) {
+  const SCREEN = document.querySelector(".screen");
+  SCREEN.innerText = text;
+}
