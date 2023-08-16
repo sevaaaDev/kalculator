@@ -18,11 +18,15 @@ for (let item of button) {
       console.log(operator)
     } else if (e.target.innerText === '=') {
       hasil = operate[operator](operand1, operand2)
+      console.log(hasil)
     }
   })
 }
 
 const operate = {
-  '+': (a, b) => +a + +b
+  '+': (a, b) => +a + +b,
+  '−': (a, b) => +a - +b,
+  '÷': (a, b) => +a / +b,
+  '×': (a, b) => +a * +b,
 }
 
