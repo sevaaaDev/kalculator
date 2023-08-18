@@ -22,10 +22,18 @@ let hasil;
 
 for (let item of CALC_BTN) {
   item.addEventListener("click", (e) => {
-    if (e.target.className === "operand" && operator === "" && operand.first.length < 8) {
+    if (
+      e.target.className === "operand" &&
+      operator === "" &&
+      operand.first.length < 8
+    ) {
       operand.first = operand.first + e.target.innerText;
       displayNumber(operand.first);
-    } else if (e.target.className === "operand" && operator !== "" && operand.last.length < 8) {
+    } else if (
+      e.target.className === "operand" &&
+      operator !== "" &&
+      operand.last.length < 8
+    ) {
       operand.last = operand.last + e.target.innerText;
       displayNumber(operand.last);
     } else if (
@@ -39,7 +47,7 @@ for (let item of CALC_BTN) {
       operand.first = String(hasil);
       operand.last = "";
       operator = "";
-      displayNumber(hasil);
+      displayNumber(getSciNotation(String(hasil)));
     }
   });
 }
@@ -59,10 +67,21 @@ CLEAR_BTN.onclick = () => {
   operand.last = "";
   operator = "";
   hasil = "";
-  displayNumber(operand.first)
+  displayNumber(operand.first);
 };
 
 function displayNumber(text) {
   const SCREEN = document.querySelector(".screen");
   SCREEN.innerText = text;
+}
+
+function getSciNotation(hasil) {
+  const hasilSciNotation = `${hasil / 10 ** (hasil.length - 1)}e${hasil.length - 1}`;
+  const hasilDecimalRounded = `${parseFloat(hasil).toFixed()}`;
+  const hasilIntegerRounded = `${(hasil / 10 ** (hasil.length - 1)).toFixed(1) * 10 ** (hasil.length - 1)}`;
+  if (hasil.length <= 8) return hasil;
+  if (hasil.includes("+")) return "too much";
+  if (hasil.length > 8 && hasil.includes(".")) return hasilDecimalRounded;
+  if (hasilSciNotation.length > 8) return getSciNotation(hasilIntegerRounded);
+  return hasilSciNotation;
 }
