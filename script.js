@@ -18,7 +18,7 @@ let operand = {
   last: "",
 };
 let operator = "";
-let hasil;
+let result;
 
 for (let item of CALC_BTN) {
   item.addEventListener("click", (e) => {
@@ -37,6 +37,22 @@ for (let item of CALC_BTN) {
       operand.last = operand.last + e.target.innerText;
       displayNumber(operand.last);
     } else if (
+      e.target.innerText === '.' &&
+      operator === "" &&
+      operand.first.length < 8 &&
+      !(operand.first.includes('.'))
+    ) {
+      operand.first = operand.first + e.target.innerText;
+      displayNumber(operand.first);
+    } else if (
+      e.target.innerText === '.' &&
+      operator !== "" &&
+      operand.last.length < 8 &&
+      !(operand.last.includes('.'))
+    ) {
+      operand.last = operand.last + e.target.innerText;
+      displayNumber(operand.last);
+    } else if (
       e.target.className === "operator" &&
       e.target.innerText !== "="
     ) {
@@ -44,10 +60,10 @@ for (let item of CALC_BTN) {
       displayNumber(operator);
     } else if (e.target.innerText === "=" && operator !== "") {
       result = operate[operator](operand.first, operand.last);
-      operand.first = String(hasil);
+      operand.first = String(result);
       operand.last = "";
       operator = "";
-      displayNumber(getSciNotation(String(hasil)));
+      displayNumber(getSciNotation(`${result}`));
     }
   });
 }
@@ -66,7 +82,7 @@ CLEAR_BTN.onclick = () => {
   operand.first = "";
   operand.last = "";
   operator = "";
-  hasil = "";
+  result = "";
   displayNumber(operand.first);
 };
 
