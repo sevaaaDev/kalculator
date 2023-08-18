@@ -22,10 +22,10 @@ let hasil;
 
 for (let item of CALC_BTN) {
   item.addEventListener("click", (e) => {
-    if (e.target.className === "operand" && operator === "") {
+    if (e.target.className === "operand" && operator === "" && operand.first.length < 8) {
       operand.first = operand.first + e.target.innerText;
       displayNumber(operand.first);
-    } else if (e.target.className === "operand") {
+    } else if (e.target.className === "operand" && operator !== "" && operand.last.length < 8) {
       operand.last = operand.last + e.target.innerText;
       displayNumber(operand.last);
     } else if (
