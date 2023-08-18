@@ -43,7 +43,7 @@ for (let item of CALC_BTN) {
       operator = e.target.innerText;
       displayNumber(operator);
     } else if (e.target.innerText === "=" && operator !== "") {
-      hasil = operate[operator](operand.first, operand.last);
+      result = operate[operator](operand.first, operand.last);
       operand.first = String(hasil);
       operand.last = "";
       operator = "";
@@ -75,13 +75,14 @@ function displayNumber(text) {
   SCREEN.innerText = text;
 }
 
-function getSciNotation(hasil) {
-  const hasilSciNotation = `${hasil / 10 ** (hasil.length - 1)}e${hasil.length - 1}`;
-  const hasilDecimalRounded = `${parseFloat(hasil).toFixed()}`;
-  const hasilIntegerRounded = `${(hasil / 10 ** (hasil.length - 1)).toFixed(1) * 10 ** (hasil.length - 1)}`;
-  if (hasil.length <= 8) return hasil;
-  if (hasil.includes("+")) return "too much";
-  if (hasil.length > 8 && hasil.includes(".")) return hasilDecimalRounded;
-  if (hasilSciNotation.length > 8) return getSciNotation(hasilIntegerRounded);
-  return hasilSciNotation;
+function getSciNotation(result) {
+  const resultSciNotation = `${result / 10 ** (result.length - 1)}e${result.length - 1}`;
+  const resultDecimalRounded = `${parseFloat(result).toFixed()}`;
+  const resultIntegerRounded = 
+  `${(result / 10 ** (result.length - 1)).toFixed(1) * 10 ** (result.length - 1)}`;
+  if (result.length <= 8) return result;
+  if (result.includes("+")) return "too much";
+  if (result.length > 8 && result.includes(".")) return resultDecimalRounded;
+  if (resultSciNotation.length > 8) return getSciNotation(resultIntegerRounded);
+  return resultSciNotation;
 }
