@@ -1,6 +1,3 @@
-// TODO
-// add keyboard support
-
 const operate = {
   "+": (a, b) => +a + +b,
   "−": (a, b) => +a - +b,
