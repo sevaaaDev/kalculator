@@ -1,3 +1,6 @@
+// TODO
+// add keyboard support
+
 const operate = {
   "+": (a, b) => +a + +b,
   "−": (a, b) => +a - +b,
@@ -25,10 +28,10 @@ let result;
 
 for (let operandBtn of OPERAND_BTN) {
   operandBtn.addEventListener("click", () => {
-    if (operator === "" && operand.first.length < 8) {
+    if (operator === "" && operand.first.length < 12) {
       operand.first = operand.first + operandBtn.innerText;
       displayNumber(operand.first);
-    } else if (operator !== "" && operand.last.length < 8) {
+    } else if (operator !== "" && operand.last.length < 12) {
       operand.last = operand.last + operandBtn.innerText;
       displayNumber(operand.last);
     }
@@ -39,12 +42,13 @@ for (let operatorBtn of OPERATOR_BTN) {
   operatorBtn.addEventListener("click", () => {
     if (operator === '' && operatorBtn.innerText !== "=") {
       operator = operatorBtn.innerText;
+      displayNumber(operator);
     } else if (operatorBtn.innerText !== "=") {
       result = operate[operator](operand.first, operand.last);
       operand.first = String(result);
       operand.last = "";
       operator = operatorBtn.innerText;
-      displayNumber(getSciNotation(`${result}`));
+      displayNumber(operator);
     } else if (operatorBtn.innerText === "=" && operator !== "") {
       result = operate[operator](operand.first, operand.last);
       operand.first = String(result);
@@ -55,40 +59,17 @@ for (let operatorBtn of OPERATOR_BTN) {
   });
 }
 
-for (let btn of CALC_BTN) {
-  btn.addEventListener('click', () => {
-    for (let button of OPERATOR_BTN) {
-      button.style.background = 'purple'
-    }
-    for (let button of OPERAND_BTN) {
-      button.style.background = 'aliceblue'
-    }
-  })
-}
-
-for (let operandBtn of OPERAND_BTN) {
-  operandBtn.addEventListener('click', () => {
-    operandBtn.style.background = 'lightblue'
-  })
-} 
-
-for (let operatorBtn of OPERATOR_BTN) {
-  operatorBtn.addEventListener('click', () => {
-    operatorBtn.style.background = 'green'
-  })
-}
-
 DECIMAL_POINT.onclick = () => {
   if (
     operator === "" &&
-    operand.first.length < 8 &&
+    operand.first.length < 12 &&
     !operand.first.includes(".")
   ) {
     operand.first = operand.first + DECIMAL_POINT.innerText;
     displayNumber(operand.first);
   } else if (
     operator !== "" &&
-    operand.last.length < 8 &&
+    operand.last.length < 12 &&
     !operand.last.includes(".")
   ) {
     operand.last = operand.last + DECIMAL_POINT.innerText;
@@ -115,8 +96,10 @@ CLEAR_BTN.onclick = () => {
 };
 
 function displayNumber(text) {
-  const SCREEN = document.querySelector(".screen");
-  SCREEN.innerText = text;
+  const INPUT_SCREEN = document.querySelector(".input");
+  const OUTPUT_SCREEN = document.querySelector('.output')
+  OUTPUT_SCREEN.innerText = `${operand.first} ${operator} ${operand.last}`
+  INPUT_SCREEN.innerText = text;
 }
 
 function getSciNotation(result) {
@@ -127,9 +110,9 @@ function getSciNotation(result) {
   const resultIntegerRounded = `${
     (result / 10 ** (result.length - 1)).toFixed(1) * 10 ** (result.length - 1)
   }`;
-  if (result.length <= 8) return result;
-  if (result.includes("+")) return "too much";
-  if (result.length > 8 && result.includes(".")) return resultDecimalRounded;
-  if (resultSciNotation.length > 8) return getSciNotation(resultIntegerRounded);
+  if (result.length <= 12) return result;
+  if (result.includes("+")) return "too big lmao";
+  if (result.length > 12 && result.includes(".")) return resultDecimalRounded;
+  if (resultSciNotation.length > 12) return getSciNotation(resultIntegerRounded);
   return resultSciNotation;
 }
