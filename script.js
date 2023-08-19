@@ -95,6 +95,11 @@ CLEAR_BTN.onclick = () => {
   displayNumber(operand.first);
 };
 
+
+window.addEventListener('keydown', (e) => {
+  let btn = document.querySelector(`data`)
+})
+
 function displayNumber(text) {
   const INPUT_SCREEN = document.querySelector(".input");
   const OUTPUT_SCREEN = document.querySelector('.output')
