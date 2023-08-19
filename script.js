@@ -7,6 +7,7 @@ const operate = {
     return +a / +b;
   },
   "×": (a, b) => +a * +b,
+  '^': (a, b) => (+a) ** +b,
 };
 
 const CALC_BTN = document.querySelectorAll("button");
@@ -23,9 +24,9 @@ let operand = {
 let operator = "";
 let result;
 
-DECIMAL_POINT.onclick = getDecimal();
-DELETE_BTN.onclick = deleteSomeShit();
-CLEAR_BTN.onclick = clearAllOfIt();
+DECIMAL_POINT.onclick = getDecimal;
+DELETE_BTN.onclick = deleteSomeShit;
+CLEAR_BTN.onclick = clearAllOfIt;
 window.addEventListener("keydown", keyHandler);
 for (let operandBtn of OPERAND_BTN) {
   operandBtn.addEventListener("click", () => {
