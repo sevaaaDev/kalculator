@@ -57,8 +57,6 @@
 }
 
 .btn-clear, .btn-delete  {
-  width: 160px;
-  height: 40px;
   background-color: blueviolet;
   color: white;
 }
@@ -75,6 +73,10 @@ button {
 .operator {
   background-color: purple;
   color: white;
+}
+
+button[data-key='Enter'] {
+  width: 160px;
 }
 
 button:hover, button:focus {
