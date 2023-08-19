@@ -9,7 +9,7 @@
   width: 90%;
   max-width: 80ch;
   height: 75svh;
-  margin: 5rem auto;
+  margin: 3rem auto;
   display: flex;
 }
 
@@ -82,4 +82,8 @@ button[data-key='Enter'] {
 button:hover, button:focus {
   transform: scale(1.1);
   translate: 0 -2px;
+}
+
+footer p {
+  text-align: center;
 }
